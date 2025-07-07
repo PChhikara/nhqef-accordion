@@ -492,6 +492,22 @@ function isGAInputValid() {
   }
   return true;
 }
+function cleanPlaceholder(part) {
+  const p = part.slice(1, -1).trim();
+  const map = {
+    "particular key concepts/theories": "e.g. limits, continuity",
+    "procedural techniques for solving problems related to the subject and, if possible, interdisciplinary contexts": "e.g. integration by substitution",
+    "two or more specific key ideas in the subject, and, if possible, interdisciplinary contexts": "e.g. limits and rates of change",
+    "technical and cognitive tasks relevant to discipline and, if applicable, interdisciplinary contexts": "e.g. formulating equations",
+    "discipline-specific problems, if relevant, in interdisciplinary contexts.": "e.g. applications of derivatives in economics",
+    "tools/techniques": "e.g. definite integrals or Python",
+    "specific task": "e.g. calculating area under a curve",
+    "model/solution": "e.g. a population growth model",
+    "problem/task": "e.g. predicting rainfall patterns",
+    "group activity": "e.g. a collaborative project on real-world math problems"
+  };
+  return map[p] || p;
+}
 
 
 const cloTemplates = {
@@ -770,7 +786,7 @@ function displayCLOTemplate() {
         } else if (part.startsWith("[")) {
           const input = document.createElement("input");
           input.type = "text";
-          input.placeholder = "Write something...";
+         input.placeholder = cleanPlaceholder(part);
           input.style.width = "280px";
           cloLine.appendChild(input);
         } else {
