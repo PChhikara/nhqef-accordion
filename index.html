@@ -422,22 +422,35 @@ function saveGA() {
   const gaText = `${subGA}: ${sentence}`;
   li.textContent = `${gaIndex}. ${gaText}`;
 
-  const editButton = document.createElement("button");
-  editButton.textContent = "Edit";
-  editButton.style.marginLeft = "10px";
-  editButton.onclick = () => {
-    const gaCategory = Object.keys(gaOptions).find(key => gaOptions[key].includes(subGA));
-    if (gaCategory) {
-      broadGASelect.value = gaCategory;
-      updateSubGAs();
-      setTimeout(() => {
-        subGASelect.value = subGA;
-        updateSentenceStructure();
-      }, 100);
-    }
-  };
-  li.appendChild(editButton);
-  gaList.appendChild(li);
+ const editButton = document.createElement("button");
+editButton.textContent = "Edit";
+editButton.style.marginLeft = "10px";
+editButton.onclick = () => {
+  const gaCategory = Object.keys(gaOptions).find(key => gaOptions[key].includes(subGA));
+  if (gaCategory) {
+    broadGASelect.value = gaCategory;
+    updateSubGAs();
+    setTimeout(() => {
+      subGASelect.value = subGA;
+      updateSentenceStructure();
+    }, 100);
+  }
+};
+
+const deleteButton = document.createElement("button");
+deleteButton.textContent = "Delete";
+deleteButton.style.marginLeft = "10px";
+deleteButton.onclick = () => {
+  if (confirm("Are you sure you want to delete this GA?")) {
+    gaData.splice(index, 1); // remove from array
+    displayGAs(); // re-render list
+  }
+};
+
+li.appendChild(editButton);
+li.appendChild(deleteButton);
+gaList.appendChild(li);
+
   
 
   sentenceStructureDiv.innerHTML = '';
