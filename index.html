@@ -442,8 +442,11 @@ deleteButton.textContent = "Delete";
 deleteButton.style.marginLeft = "10px";
 deleteButton.onclick = () => {
   if (confirm("Are you sure you want to delete this GA?")) {
-    gaData.splice(index, 1); // remove from array
-    displayGAs(); // re-render list
+    const itemIndex = gaData.indexOf(item);
+    if (itemIndex !== -1) {
+      gaData.splice(itemIndex, 1);
+      displayGAs();
+    }
   }
 };
 
