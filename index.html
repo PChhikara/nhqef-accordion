@@ -1074,7 +1074,7 @@ cloDisplay.appendChild(note);
         } else if (part.startsWith("[")) {
           const input = document.createElement("input");
           input.type = "text";
-          input.placeholder = "Write something...";
+          input.placeholder = cleanPlaceholder(part);
           input.style.width = "280px";
           sentenceLine.appendChild(input);
           inputs.push(input);
@@ -1318,7 +1318,7 @@ label.style.color = "#6f42c1";
         } else if (part.startsWith("[")) {
           const input = document.createElement("input");
           input.type = "text";
-          input.placeholder = "Write something...";
+         input.placeholder = cleanPlaceholder(part);
           input.style.width = "280px";
           sentenceLine.appendChild(input);
           inputs.push(input);
